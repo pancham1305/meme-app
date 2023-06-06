@@ -74,6 +74,7 @@
     const download = async (url) => {
       const res = await fetch(url).then((res) => res.blob());
       let blobUrl = window.URL.createObjectURL(res);
+      console.log(blobUrl);
       let a = document.createElement("a");
       a.download = "meme.png";
       a.href = blobUrl;

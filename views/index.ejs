@@ -13,13 +13,14 @@
       <nav class="navbar">
         <div class="head">Memes for you</div>
         <div>
-          <a
+          <button
             href="<%=data.preview[data.preview.length -1]%>"
             role="button"
             class="button-name"
             download="meme.png"
-            >Download</a
           >
+            Download
+          </button>
         </div>
       </nav>
       <!-- <hr /> -->
@@ -62,4 +63,23 @@
       </div>
     </main>
   </body>
+  <script>
+    const btn = document.querySelector(".button-name");
+    const url = "<%=data.url%>";
+    // console.log(url);
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      download(url);
+    });
+    const download = async (url) => {
+      const res = await fetch(url).then((res) => res.blob());
+      let blobUrl = window.URL.createObjectURL(res);
+      let a = document.createElement("a");
+      a.download = "meme.png";
+      a.href = blobUrl;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    };
+  </script>
 </html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meme App</title>
+    <link rel="stylesheet" href="app.css" />
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body>
+    <main id="main">
+      <nav class="navbar">
+        <div class="head">Memes for you</div>
+        <div>
+          <a
+            href="<%=data.preview[data.preview.length -1]%>"
+            role="button"
+            class="button-name"
+            download="meme.png"
+            >Download</a
+          >
+        </div>
+      </nav>
+      <!-- <hr /> -->
+      <div class="card">
+        <div class="tools">
+          <div class="circle">
+            <span class="red box"></span>
+          </div>
+          <div class="circle">
+            <span class="yellow box"></span>
+          </div>
+          <div class="circle">
+            <span class="green box"></span>
+          </div>
+        </div>
+        <div class="card__content">
+          <img src="<%=data.preview[data.preview.length -1]%>" alt="" />
+        </div>
+      </div>
+      <div class="btn">
+        <form method="post" action="/">
+          <button class="cssbuttons-io-button">
+            Next
+            <div class="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+              >
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path
+                  fill="currentColor"
+                  d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                ></path>
+              </svg>
+            </div>
+          </button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

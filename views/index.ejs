@@ -14,7 +14,7 @@
         <div class="head">Memes for you</div>
         <div>
           <button
-            href="<%=data.preview[data.preview.length -1]%>"
+            href="<%=data.url%>"
             role="button"
             class="button-name"
             download="meme.png"
@@ -63,21 +63,32 @@
       </div>
     </main>
   </body>
-  <script>
+  <script type="text/javascript">
     const btn = document.querySelector(".button-name");
     const url = "<%=data.url%>";
-    // console.log(url);
+
+    console.log(url);
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       download(url);
     });
+
     const download = async (url) => {
-      const res = await fetch(url).then((res) => res.blob());
-      let blobUrl = window.URL.createObjectURL(res);
-      console.log(blobUrl);
+      // const res = await fetch(url).then((res) => res.blob());
+      let localUrl = "http://localhost:3000/download";
+      let postUrl = url;
+      console.log(postUrl);
+      const data = await fetch(localUrl, {
+        method: "POST",
+        body: JSON.stringify({ url: postUrl }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
       let a = document.createElement("a");
       a.download = "meme.png";
-      a.href = blobUrl;
+      a.href = "http://localhost:3000/meme.png";
       document.body.appendChild(a);
       a.click();
       a.remove();

@@ -83,7 +83,7 @@
           "Content-Type": "application/json",
         },
       });
-      const img = await fetch("https://meme-app.panchammehta.repl.co/meme.png").then(res=>res.blob());
+      const img = await fetch("https://meme-app.panchammehta.repl.co/image").then(res=>res.blob());
       // console.log(img);
       const blobUrl = window.URL.createObjectURL(img);
       console.log(blobUrl)

@@ -29,6 +29,9 @@ app.post("/", async (req, res) => {
 
 app.post("/download", async (req, res) => {
   const { url } = req.body;
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   // console.log(url);
   const response = await fetch(url, {
     method: "GET",
@@ -44,8 +47,18 @@ app.post("/download", async (req, res) => {
   res.setHeader("Content-Disposition", "attachment; filename=meme.png");
   res.download("./public/meme.png");
 });
+
 app.options("/download", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.json();
+});
+app.get("/image", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.sendFile(`${process.cwd()}/public/meme.png`);
 })
 
 app.listen(PORT, () => {

@@ -72,11 +72,11 @@
     const main = document.querySelector("#main");
     const loader = document.querySelector(".loader");
     console.log(url);
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", async (e) => {
       e.preventDefault();
       loader.classList.remove("hide");
       main.classList.add("hide");
-      download(url);
+      await download(url);
       loader.classList.add("hide");
       main.classList.remove("hide");
     });

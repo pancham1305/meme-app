@@ -9,16 +9,21 @@
     <link rel="manifest" href="manifest.json" />
   </head>
   <body>
+    <div class="loader hide">
+      <div class="spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
     <main id="main">
       <nav class="navbar">
         <div class="head">Memes for you</div>
         <div>
-          <button
-            role="button"
-            class="button-name"
-          >
-            Download
-          </button>
+          <button role="button" class="button-name">Download</button>
         </div>
       </nav>
       <!-- <hr /> -->
@@ -64,15 +69,19 @@
   <script type="text/javascript">
     const btn = document.querySelector(".button-name");
     const url = "<%=data.url%>";
-
+    const main = document.querySelector("#main");
+    const loader = document.querySelector(".loader");
     console.log(url);
     btn.addEventListener("click", (e) => {
       e.preventDefault();
+      loader.classList.remove("hide");
+      main.classList.add("hide");
       download(url);
+      loader.classList.add("hide");
+      main.classList.remove("hide");
     });
 
     const download = async (url) => {
-      // const res = await fetch(url).then((res) => res.blob());
       let localUrl = "https://meme-app.panchammehta.repl.co/download";
       let postUrl = url;
       console.log(postUrl);
@@ -83,10 +92,12 @@
           "Content-Type": "application/json",
         },
       });
-      const img = await fetch("https://meme-app.panchammehta.repl.co/image").then(res=>res.blob());
+      const img = await fetch(
+        "https://meme-app.panchammehta.repl.co/image"
+      ).then((res) => res.blob());
       // console.log(img);
       const blobUrl = window.URL.createObjectURL(img);
-      console.log(blobUrl)
+      console.log(blobUrl);
       let a = document.createElement("a");
       a.download = "meme.png";
       a.href = blobUrl;

@@ -1,7 +1,9 @@
 import express from "express";
 import path from "path";
 import fs, { createReadStream } from "fs";
+import cors from "cors";
 const app = express();
+// app.use(cors())
 const PORT = 3000;
 app.set("view engine", "ejs");
 app.set("views", path.join(process.cwd(), "views"));
@@ -42,6 +44,9 @@ app.post("/download", async (req, res) => {
   res.setHeader("Content-Disposition", "attachment; filename=meme.png");
   res.download("./public/meme.png");
 });
+app.options("/download", (req, res) => {
+  res.json();
+})
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

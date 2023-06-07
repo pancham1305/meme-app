@@ -14,10 +14,8 @@
         <div class="head">Memes for you</div>
         <div>
           <button
-            href="<%=data.url%>"
             role="button"
             class="button-name"
-            download="meme.png"
           >
             Download
           </button>
@@ -75,7 +73,7 @@
 
     const download = async (url) => {
       // const res = await fetch(url).then((res) => res.blob());
-      let localUrl = "http://localhost:3000/download";
+      let localUrl = "https://meme-app.panchammehta.repl.co/download";
       let postUrl = url;
       console.log(postUrl);
       const data = await fetch(localUrl, {
@@ -85,10 +83,13 @@
           "Content-Type": "application/json",
         },
       });
-
+      const img = await fetch("https://meme-app.panchammehta.repl.co/meme.png").then(res=>res.blob());
+      // console.log(img);
+      const blobUrl = window.URL.createObjectURL(img);
+      console.log(blobUrl)
       let a = document.createElement("a");
       a.download = "meme.png";
-      a.href = "http://localhost:3000/meme.png";
+      a.href = blobUrl;
       document.body.appendChild(a);
       a.click();
       a.remove();
